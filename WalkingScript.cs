@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WalkingScript : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class WalkingScript : MonoBehaviour
     private static float walkingposition;
     private static Boolean facingleft;
     private static Boolean facingright;
+    public static Scene kitchen;
+    private String nextscene;
+    private static int sceneindexer;
+    public List<String> scenes = new List<String>();
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +26,8 @@ public class WalkingScript : MonoBehaviour
         character = this.gameObject;
         facingleft = false;
         facingright = true;
+        scenes.Add("Bedroom");
+        scenes.Add("Kitchen");
     }
 
     // Update is called once per frame
@@ -52,9 +59,18 @@ public class WalkingScript : MonoBehaviour
     private void MovingLeft()
     {
         walk.Play("Backwardwalk");
-        if (position >= -1.396643)
+        if (position > -1.396643)
         {
             position -= Time.deltaTime / 2;
+        }
+        else if (position <= -1.396643)
+        {
+
+              if(sceneindexer != 0)
+            {
+                sceneindexer--;
+                SceneManager.LoadScene(scenes[sceneindexer]);
+            }
         }
     }
 
@@ -73,6 +89,13 @@ public class WalkingScript : MonoBehaviour
 
     private void MovingRight()
     {
+
+        if (position >= 1.035352)
+        {
+            sceneindexer++;
+            SceneManager.LoadScene(scenes[sceneindexer]);
+
+        }
         walk.Play("WalkAnim");
         position += Time.deltaTime/2;
     }

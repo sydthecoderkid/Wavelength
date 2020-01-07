@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WalkingScript : MonoBehaviour
 {
@@ -10,8 +11,16 @@ public class WalkingScript : MonoBehaviour
     public GameObject character;
     public static float position;
     private static float walkingposition;
-    private static Boolean facingleft;
-    private static Boolean facingright;
+    public  bool facingleft;
+    public  bool facingright;
+    public static bool switchedleft;
+    public static bool switchedright;
+    public static Scene kitchen;
+    private String nextscene;
+    public static float spawnpoint = 1.4f;
+    private static int sceneindexer = 1;
+    public static List<String> scenes = new List<String>();
+    SpawnCharacter spawner;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +28,7 @@ public class WalkingScript : MonoBehaviour
         walk = this.gameObject.GetComponent<Animator>();
        position = character.transform.position.x;
         character = this.gameObject;
-        facingleft = false;
-        facingright = true;
+        SceneList.ScenesAdd();
     }
 
     // Update is called once per frame
@@ -52,9 +60,20 @@ public class WalkingScript : MonoBehaviour
     private void MovingLeft()
     {
         walk.Play("Backwardwalk");
-        if (position >= -1.396643)
+        if (position > -1.396643)
         {
             position -= Time.deltaTime / 2;
+        }
+        else if (position <= -1.396643)
+        {
+
+              if(sceneindexer != 0)
+            {
+                sceneindexer--;
+                switchedleft = true;
+                switchedright = false;
+                SceneManager.LoadScene(scenes[sceneindexer]);
+            }
         }
     }
 
@@ -73,6 +92,14 @@ public class WalkingScript : MonoBehaviour
 
     private void MovingRight()
     {
+
+        if (position >= 1.3)
+        {
+            sceneindexer++;
+            switchedright = true;
+            switchedleft = false;
+            SceneManager.LoadScene(scenes[sceneindexer]);
+        }
         walk.Play("WalkAnim");
         position += Time.deltaTime/2;
     }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Collision : MonoBehaviour
 {
-    public BoxCollider2D col;
     public static float currentposition;
     // Start is called before the first frame update
     void Start()

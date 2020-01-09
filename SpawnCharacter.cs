@@ -6,16 +6,19 @@ public class SpawnCharacter : MonoBehaviour
 {
     // Start is called before the first frame update
     public static int holder;
-    public static System.Boolean firstspawn = true;
+    public static bool firstspawn = true;
     public GameObject character;
     WalkingScript characterpos;
     void Start()
     {
-        WalkingScript.switchedleft = true;
-   
-        if (WalkingScript.switchedleft == true) { 
-        SpawnLeft();
-          }
+        Instantiate(character);
+        characterpos = character.GetComponent<WalkingScript>();
+        if (firstspawn)
+        {
+            WalkingScript.position = -0.6f;
+            firstspawn = false;
+        }
+        Spawncharacter();
         
     }
 
@@ -24,22 +27,20 @@ public class SpawnCharacter : MonoBehaviour
     {
 
     }
-    public void SpawnLeft()
+    public void Spawncharacter()
     {
-
-        Instantiate(character);
-        characterpos = character.GetComponent<WalkingScript>();
-        characterpos.facingleft = true;
-        characterpos.facingright = false;
-        //WalkingScript.position = 0.3f;
+        
+        if (WalkingScript.switchedleft)
+        {
+            WalkingScript.position = 1f;
+            Debug.Log("Here-faceleft");
+        }
+         if (WalkingScript.switchedright)
+        {
+             WalkingScript.position = -0.8f;
+            Debug.Log("Here-faceright");
+        }
     }
 
-    public void SpawnRight()
-    {
-        Instantiate(character);
-        characterpos = character.GetComponent<WalkingScript>();
-        characterpos.facingleft = false;
-        characterpos.facingright = true;
-        //WalkingScript.position = 1f;s
-    }
+
 }

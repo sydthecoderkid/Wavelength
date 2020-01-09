@@ -14,7 +14,7 @@ public class Collision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentposition = WalkingScript.position;
+        //currentposition = WalkingScript.position;
     }
    
 }

@@ -10,15 +10,13 @@ public class WalkingScript : MonoBehaviour
     public Animator walk;
     public GameObject character;
     public static float position;
-    private static float walkingposition;
-    public  bool facingleft;
-    public  bool facingright;
-    public static bool switchedleft;
-    public static bool switchedright;
-    public static Scene kitchen;
-    private String nextscene;
-    public static float spawnpoint = 1.4f;
-    private static int sceneindexer = 1;
+    public  static bool facingleft;
+    public  static bool facingright = true;
+    public  static bool switchedleft = false;
+    public  static bool switchedright = false;
+    public static float spawny= -0.083f;
+    private static int sceneindexer = 0;
+    public  float startingspawn;
     public static List<String> scenes = new List<String>();
     SpawnCharacter spawner;
     // Start is called before the first frame update
@@ -26,15 +24,15 @@ public class WalkingScript : MonoBehaviour
     {
         walkanim = this.gameObject.GetComponent<Animation>();
         walk = this.gameObject.GetComponent<Animator>();
-       position = character.transform.position.x;
         character = this.gameObject;
         SceneList.ScenesAdd();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = new Vector2(position, this.transform.position.y);
+        transform.position = new Vector2(position, spawny);
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
 

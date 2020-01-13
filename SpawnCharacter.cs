@@ -11,6 +11,7 @@ public class SpawnCharacter : MonoBehaviour
     WalkingScript characterpos;
     void Start()
     {
+        //When testing combat systems, make sure to change firstspawn position.
         Instantiate(character);
         characterpos = character.GetComponent<WalkingScript>();
         if (firstspawn)

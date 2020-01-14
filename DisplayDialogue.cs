@@ -73,22 +73,30 @@ if(currentmessage != null){
     }
 
     public void nextmessage(){
-        currentmessage = "";
        empty = "";
-       currentmessage = secondmessage;
-                 indexer = currentmessage.Length;
+       if(this.thirdmessage != null && finalmessage == true){
+           currentmessage = this.thirdmessage;
+           keepmessage = true;
+       }
+       else{
+       currentmessage = this.secondmessage;
+       }
+     indexer = currentmessage.Length;
           time = 0;
          secondtimer = 0;
           count = 0;
+          switchmessage = false;
+          finalmessage = true;
 
 
     }
 
     public void loadmessages(){
       if(currentscene.Equals("Kitchen")){
-          firstmessage = "Malcom! There are bullies outside!";
-           secondmessage= "They're saying that they want to fight you!";
-            currentmessage = firstmessage;
+          this.firstmessage = "Malcom! There are bullies outside!";
+           this.secondmessage= "They're saying that they want to fight you!";
+           this.thirdmessage = "Go outside and look!";
+            this.currentmessage = this.firstmessage;
       }
 
     }

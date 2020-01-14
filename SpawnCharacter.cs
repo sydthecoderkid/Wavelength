@@ -13,11 +13,6 @@ public class SpawnCharacter : MonoBehaviour
 
     private Scene scene;
     private string currentscene;
-
-    
-        public GameObject npc1;
-         public GameObject npc2;
-          public GameObject npc3;
     void Start()
     {
         //When testing combat systems, make sure to change firstspawn position.

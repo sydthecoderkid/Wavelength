@@ -26,7 +26,6 @@ public class SpawnCharacter : MonoBehaviour
          scene = SceneManager.GetActiveScene();
         currentscene = scene.name;
         Spawncharacter();
-        SpawnNPCS();
         
     }
 

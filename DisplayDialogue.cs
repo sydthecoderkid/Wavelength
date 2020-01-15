@@ -52,7 +52,7 @@ if(currentmessage != null){
          displaytext();
          
      }
-     if(secondtimer >= timetowrite +4 && !keepmessage){
+     if(secondtimer >= timetowrite +2 && !keepmessage){
          switchmessage = true;
      }
 
@@ -93,10 +93,17 @@ if(currentmessage != null){
 
     public void loadmessages(){
       if(currentscene.Equals("Kitchen")){
-          this.firstmessage = "Malcom! There are bullies outside!";
-           this.secondmessage= "They're saying that they want to fight you!";
+          this.firstmessage = "Malcom! There's a bully outside!";
+           this.secondmessage= "He's saying that he wants to fight you!";
            this.thirdmessage = "Go outside and look!";
             this.currentmessage = this.firstmessage;
+      }
+      if(currentscene.Equals("Road#1")){
+          this.firstmessage = "Sup Dweeb! Your stupid sister said you were around.";
+          this.secondmessage = "I bet you thought it was real funny tripping me yesterday, huh?";
+          this.thirdmessage = "Jokes on you! Nobody messes with the Bradster! Put em' up!";
+          this.currentmessage = this.firstmessage;
+          
       }
 
     }

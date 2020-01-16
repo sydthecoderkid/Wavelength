@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class SpawnCharacter : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class SpawnCharacter : MonoBehaviour
 
     private Scene scene;
     private string currentscene;
+    public static TextMeshProUGUI text;
     void Start()
     {
         //When testing combat systems, make sure to change firstspawn position.
@@ -46,12 +48,5 @@ public class SpawnCharacter : MonoBehaviour
              WalkingScript.position = -0.8f;
         }
     }
-
-    public void SpawnNPCS(){
-        if(currentscene.Equals("Kitchen")){
-        }
-
-    }
-
 
 }

@@ -15,7 +15,8 @@ public class WalkingScript : MonoBehaviour
     public  static bool switchedleft = false;
     public  static bool switchedright = false;
     public static float spawny= -0.083f;
-    private static int sceneindexer = 0;
+    public static int sceneindexer = 0;
+    public static bool movementenabled = true;
     public  float startingspawn;
     public static List<String> scenes = new List<String>();
     SpawnCharacter spawner;
@@ -32,20 +33,25 @@ public class WalkingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         transform.position = new Vector2(position, spawny);
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
-
+            
+            if(movementenabled){
             MovingRight();
             facingright = true;
             facingleft = false;
+            }
         }
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
-
+        
+            if(movementenabled){
             MovingLeft();
             facingright = false;
             facingleft = true;
+            }
         }
 
         if (!(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
@@ -53,6 +59,7 @@ public class WalkingScript : MonoBehaviour
 
             NotWalking();
         }
+    
     }
 
     private void MovingLeft()

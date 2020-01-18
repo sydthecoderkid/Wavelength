@@ -21,5 +21,6 @@ public class SceneList : MonoBehaviour
         WalkingScript.scenes.Add("Bedroom");
         WalkingScript.scenes.Add("Kitchen");
         WalkingScript.scenes.Add("Road#1");
+        WalkingScript.scenes.Add("CombatScene");
     }
 }

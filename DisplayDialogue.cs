@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 public class DisplayDialogue : MonoBehaviour
 {
-    public TextMeshProUGUI Dialog;
+    public  TextMeshProUGUI Dialog;
     private string empty;
     private string currentmessage;
     private string firstmessage;
@@ -19,22 +19,25 @@ public class DisplayDialogue : MonoBehaviour
     private int indexer;
     private int count = 0;
  
-    private bool finalmessage = false;
+    private bool secondmessagedisplayed = false;
+        public static bool engagecombat = false;
     private bool keepmessage = false;
 
-    private bool tempbool = false;
+    private bool dialogfinished = false;
 
      private bool switchmessage = false;
 
+     private bool secondcharacter;
+
       private bool switchedcharacter = false;
-     public String currentscene;
+     public static String currentscene;
+
 
      public GameObject textholder;
     float timetowrite;
     // Start is called before the first frame update
     void Start()
     {
-        //TO DO: replace tempbool
            scene = SceneManager.GetActiveScene();
                 currentscene = scene.name;
                this.loadmessages();
@@ -52,9 +55,10 @@ public class DisplayDialogue : MonoBehaviour
      timetowrite = (0.1f * currentmessage.Length);
      }
 
-     if(keepmessage && secondtimer >= timetowrite +2 && !tempbool){ //Add in if there is a switched character
+     if(keepmessage && secondtimer >= timetowrite +2 && !dialogfinished && secondcharacter){ 
            empty = "";
-          Dialog.GetComponent<RectTransform>().localPosition = new Vector2(-115, 53);
+           currentmessage = "";
+          Dialog.GetComponent<RectTransform>().localPosition = new Vector2(-115, 53);//Moves the text to Malcom
             switchedcharacter = true;
             count = 0;
             keepmessage = false;
@@ -73,6 +77,10 @@ if(currentmessage != null){
      }
      if(secondtimer >= timetowrite +2 && !keepmessage){
          switchmessage = true;
+     }
+     if(secondtimer >= timetowrite +2 && keepmessage && engagecombat){
+        SceneManager.LoadScene("CombatScene");
+        CurrentScene.lastscene = currentscene;
      }
 
     }
@@ -93,19 +101,20 @@ if(currentmessage != null){
 
     public void nextmessage(){
        empty = "";
-       if(this.thirdmessage != null && finalmessage == true){
+       if(this.thirdmessage != null && secondmessagedisplayed == true){
            currentmessage = this.thirdmessage;
            keepmessage = true;
            
        }
-       else{
-       currentmessage = this.secondmessage;
-       finalmessage = true;
-       }
-       if(this.thirdmessage == null && finalmessage == true){
+        else if(this.thirdmessage == null && secondmessagedisplayed == true){
            currentmessage = this.secondmessage;
            keepmessage = true;
-           tempbool = true;
+           dialogfinished = true; 
+            engagecombat = true;
+       }
+       else{
+       currentmessage = this.secondmessage;
+       secondmessagedisplayed = true;
        }
      indexer = currentmessage.Length;
           time = 0;
@@ -123,16 +132,19 @@ if(currentmessage != null){
            this.thirdmessage = "Go outside and look!";
             this.currentmessage = this.firstmessage;
       }
-      if(currentscene.Equals("Road#1") && !switchedcharacter){
+      if(currentscene.Equals("Road#1") && !switchedcharacter && !engagecombat){
           this.firstmessage = "Sup Dweeb! Your stupid sister said you were around.";
           this.secondmessage = "I bet you thought it was real funny tripping me yesterday, huh?";
           this.thirdmessage = "Jokes on you! Nobody messes with the Bradster! Put em' up!";
+          WalkingScript.movementenabled = false;
+          secondcharacter = true;
           this.currentmessage = this.firstmessage;
 
           
       }
-       if(currentscene.Equals("Road#1") && switchedcharacter){
-           Dialog.faceColor = UnityEngine.Color.yellow;
+       if(currentscene.Equals("Road#1") && switchedcharacter && !engagecombat){
+           empty = "";
+           Dialog.faceColor = UnityEngine.Color.red;
           this.firstmessage = "Fine Bradley. Let's fight!";
           this.secondmessage = "Synthesizing wavelengths!";
           this.thirdmessage = null;

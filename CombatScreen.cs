@@ -9,11 +9,13 @@ public class CombatScreen : MonoBehaviour
     public TextMeshProUGUI text;
     public GameObject textholder;
     public GameObject button;
-
+    
+    private string enemyname;
 
 
     // Start is called before the first frame update
     void Start(){
+        loadnames();
 
     }
 
@@ -26,5 +28,13 @@ public class CombatScreen : MonoBehaviour
                  textholder.SetActive(true);
              }
         
+    }
+
+    private void loadnames(){
+        if(CurrentScene.lastscene.Equals("Road#1")){
+            enemyname = "Bradley";
+        }
+
+        text.text = enemyname + "'s Wavelength";
     }
 }

@@ -71,7 +71,7 @@ public class DisplayDialogue : MonoBehaviour
 if(currentmessage != null){
             indexer = currentmessage.Length;
 }
-     if(time >= 0.1 && currentmessage != null){
+     if(time >= 0.08 && currentmessage != null){
          displaytext();
          
      }

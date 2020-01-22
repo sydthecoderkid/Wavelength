@@ -19,7 +19,7 @@ public class BacktoBattle : MonoBehaviour
 
     public void OnMouseOver(){
         if(Input.GetMouseButtonDown(0)){
-            BeginCombat.combatbegun = true;
+            BeginCombat.combatstarted = true;
            SceneManager.LoadScene(CurrentScene.lastscene);
         }
     }

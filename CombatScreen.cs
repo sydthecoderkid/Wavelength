@@ -22,10 +22,12 @@ public class CombatScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-             text.faceColor = UnityEngine.Color.red;
+             text.faceColor = UnityEngine.Color.blue;
              if(ProgressBar.wavelengthdone){
                  button.SetActive(true);
                  textholder.SetActive(true);
+                 
+                 
              }
         
     }

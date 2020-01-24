@@ -5,14 +5,20 @@ using UnityEngine;
 public class CheckClicks : MonoBehaviour
 {
 
+public static ProgressBar progressBar;
     public static float time = 0;
     public static int misses;
+
+    public static bool miss;
     public static int succesess;
+
+
+
     // Start is called before the first frame updat
     
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -32,8 +38,10 @@ public class CheckClicks : MonoBehaviour
         }
         else if(Input.GetMouseButtonDown(0) && time > 0.5f || Input.GetMouseButtonDown(0) && time < 0.3f){
             Debug.Log("Miss!");
+            miss = true;
             misses++;
                     time = 0;
         }
     }
+ 
 }

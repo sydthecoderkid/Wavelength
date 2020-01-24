@@ -11,6 +11,8 @@ public class ChangeCombatBar : MonoBehaviour
     public GameObject combatbar2;
     public GameObject combatbar3;
     public GameObject combatbar4;
+
+        public GameObject holder;
     
     // Start is called before the first frame update
 

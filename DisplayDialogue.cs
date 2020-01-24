@@ -134,7 +134,7 @@ if(currentmessage != null){
       }
       if(currentscene.Equals("Road#1") && !switchedcharacter && !engagecombat){
           this.firstmessage = "Sup Dweeb! Your stupid sister said you were around.";
-          this.secondmessage = "I bet you thought it was real funny tripping me yesterday, huh?";
+          this.secondmessage = "I bet you thought it was real funny tripping me up yesterday, huh?";
           this.thirdmessage = "Jokes on you! Nobody messes with the Bradster! Put em' up!";
           WalkingScript.movementenabled = false;
           secondcharacter = true;

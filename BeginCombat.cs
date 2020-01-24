@@ -10,6 +10,9 @@ public class BeginCombat : MonoBehaviour
 
     public GameObject combatbarholder;
 
+    public GameObject wavelength;
+
+       public GameObject progressbar;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,5 +35,7 @@ public class BeginCombat : MonoBehaviour
 
     public void loadwavelength(){
       combatbarholder.SetActive(true);
+      wavelength.SetActive(true);
+      progressbar.SetActive(true);
     }
 }

@@ -19,7 +19,6 @@ public class BeginCombat : MonoBehaviour
         if(combatstarted){
         loadmusic();
         loadwavelength();
-        CheckClicks.checkingclicks();
         }
     }
 

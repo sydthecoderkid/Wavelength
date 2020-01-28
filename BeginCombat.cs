@@ -12,6 +12,10 @@ public class BeginCombat : MonoBehaviour
 
     public GameObject wavelength;
 
+    public GameObject wave; 
+
+    public static bool effectrun;
+
        public GameObject progressbar;
     // Start is called before the first frame update
     void Start()
@@ -25,7 +29,9 @@ public class BeginCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+     if(DisplayDialogue.engagecombat && !combatstarted){
+         loadeffect();
+     }   
     }
 
     public void loadmusic(){
@@ -36,5 +42,13 @@ public class BeginCombat : MonoBehaviour
       combatbarholder.SetActive(true);
       wavelength.SetActive(true);
       progressbar.SetActive(true);
+      wave.SetActive(false);
     }
+
+    public void loadeffect(){
+        wave.SetActive(true);
+        effectrun= true;
+    }
+    
+    
 }

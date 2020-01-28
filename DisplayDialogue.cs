@@ -52,17 +52,18 @@ public class DisplayDialogue : MonoBehaviour
      secondtimer += Time.deltaTime;
      
      if(currentmessage != null){
-     timetowrite = (0.1f * currentmessage.Length);
+     timetowrite = (0.09f * currentmessage.Length);
      }
 
      if(keepmessage && secondtimer >= timetowrite +2 && !dialogfinished && secondcharacter){ 
-           empty = "";
-           currentmessage = "";
+          empty = "";
+           if(Dialog.text.Equals("")){
           Dialog.GetComponent<RectTransform>().localPosition = new Vector2(-115, 53);//Moves the text to Malcom
             switchedcharacter = true;
             count = 0;
             keepmessage = false;
              loadmessages();
+           }
 
 
 
@@ -79,7 +80,9 @@ if(currentmessage != null){
          switchmessage = true;
      }
      if(secondtimer >= timetowrite +2 && keepmessage && engagecombat){
+                  if(BeginCombat.effectrun){
         SceneManager.LoadScene("CombatScene");
+       }
         CurrentScene.lastscene = currentscene;
      }
 
@@ -143,7 +146,6 @@ if(currentmessage != null){
           
       }
        if(currentscene.Equals("Road#1") && switchedcharacter && !engagecombat){
-           empty = "";
            Dialog.faceColor = UnityEngine.Color.red;
           this.firstmessage = "Fine Bradley. Let's fight!";
           this.secondmessage = "Synthesizing wavelengths!";

@@ -23,6 +23,8 @@ public static ProgressBar progressBar;
 
     public float timebetweenclicks;
 
+    public static bool combatended;
+
     
 
 
@@ -49,7 +51,16 @@ public static ProgressBar progressBar;
         checkingclicks();
         }
 
-        
+        if(succesess >= 8 && !combatended && BeginCombat.combatstarted|| misses >= 8 && !combatended && BeginCombat.combatstarted){
+                   BeginCombat.combatstarted = false;
+                  combatended = true;
+                  if(misses >= 8){
+                  BeginCombat.winorloss(false);
+                  }
+                  else if (succesess >= 8){
+                     BeginCombat.winorloss(true);
+                  }
+            }
     } 
 
     public void checkingclicks(){
@@ -69,13 +80,12 @@ public static ProgressBar progressBar;
         }
       
         if(time > timetoclick && time < 1 && clicks == songbps){
-            Debug.Log("hit!");
             time = 0;
             clicks =0;
             succesess++;
         }
-        else if (time > 1 && Input.GetMouseButtonDown(0) || time == 1 && clicks != songbps ){
-             Debug.Log("miss");
+        else if (time > 1 && Input.GetMouseButtonDown(0) || time >= 1 && clicks != songbps ){
+            Debug.Log("Miss");
             miss = true;
             misses++;
             clicks = 0;

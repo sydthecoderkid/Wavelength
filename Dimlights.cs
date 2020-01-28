@@ -36,5 +36,13 @@ public class Dimlights : MonoBehaviour
        tile4render.color = new Color(0.5f, 0.5f,0.5f,1);
        enemyrender.color = new Color(0.5f, 0.5f,0.5f,1);
        }   
+
+       if(!BeginCombat.combatstarted){
+        tile1render.color = UnityEngine.Color.white;
+       tile2render.color = UnityEngine.Color.white;
+       tile3render.color = UnityEngine.Color.white;
+       tile4render.color = UnityEngine.Color.white;
+       enemyrender.color = UnityEngine.Color.white;
+       }
     }
 }

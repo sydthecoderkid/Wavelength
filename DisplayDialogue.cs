@@ -30,7 +30,9 @@ public class DisplayDialogue : MonoBehaviour
      private bool secondcharacter;
 
       private bool switchedcharacter = false;
+      
      public static String currentscene;
+
 
 
      public GameObject textholder;
@@ -38,15 +40,30 @@ public class DisplayDialogue : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-           scene = SceneManager.GetActiveScene();
+     scene = SceneManager.GetActiveScene();
                 currentscene = scene.name;
-               this.loadmessages();
-      
+        this.loadmessages();
+               keepmessage = false;
+               dialogfinished = false;
+               this.loadmessages();    
     }
+    
 
     // Update is called once per frame
     void Update()
     {
+         scene = SceneManager.GetActiveScene();
+                currentscene = scene.name;
+    if(BeginCombat.won){
+               keepmessage = false;
+               dialogfinished = false;
+               switchmessage = false;
+             count = 0;
+             time = 0;
+             secondtimer = 0;
+               loadmessages();
+               BeginCombat.won = false;
+           }
       Dialog.text = empty;
      time += Time.deltaTime;
      secondtimer += Time.deltaTime;
@@ -64,17 +81,17 @@ public class DisplayDialogue : MonoBehaviour
             keepmessage = false;
              loadmessages();
            }
-
-
-
      }
 
 if(currentmessage != null){
             indexer = currentmessage.Length;
 }
-     if(time >= 0.08 && currentmessage != null){
+     if(time >= 0.08 && currentmessage != null && !dialogfinished){
          displaytext();
          
+     }
+     if(dialogfinished && CheckClicks.combatended){
+         WalkingScript.movementenabled = true;
      }
      if(secondtimer >= timetowrite +2 && !keepmessage){
          switchmessage = true;
@@ -113,7 +130,9 @@ if(currentmessage != null){
            currentmessage = this.secondmessage;
            keepmessage = true;
            dialogfinished = true; 
+           if(!CheckClicks.combatended){
             engagecombat = true;
+           }
        }
        else{
        currentmessage = this.secondmessage;
@@ -145,7 +164,7 @@ if(currentmessage != null){
 
           
       }
-       if(currentscene.Equals("Road#1") && switchedcharacter && !engagecombat){
+       if(currentscene.Equals("Road#1") && switchedcharacter && !engagecombat && !BeginCombat.won){
            Dialog.faceColor = UnityEngine.Color.red;
           this.firstmessage = "Fine Bradley. Let's fight!";
           this.secondmessage = "Synthesizing wavelengths!";
@@ -156,6 +175,21 @@ if(currentmessage != null){
           secondtimer = 0;
           
       }
+        if(currentscene.Equals("Road#1") && BeginCombat.won){
+           Dialog.faceColor = UnityEngine.Color.red;
+            Dialog.GetComponent<RectTransform>().localPosition = new Vector2(-115, 53);
+          this.firstmessage = "Gotcha Bradley.";
+          this.secondmessage = "Now if you'll excuse me, i'm getting my book back.";
+          this.thirdmessage = null;
+          this.currentmessage = this.firstmessage;
+          engagecombat = false;
+          secondcharacter = false;
+          switchedcharacter = false;
+          BeginCombat.won = false;
+          
+      }
+      
+      
 
     }
 }
